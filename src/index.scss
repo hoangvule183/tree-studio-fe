@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face{
+  font-family: "CookieRun";
+  src: local("CookieRun"),url('/font/CookieRun.ttf');
+}
+
+@font-face{
+  font-family: "ProvidenceSans";
+  src: local("ProvidenceSans"),url('/font/ProvidenceSans.ttf');
+}
+
+
+.text-title {
+  font-family: "CookieRun", sans-serif;
+}
+
+* {
+  font-family: "ProvidenceSans", sans-serif;
+  cursor: url("/images/common/cursor.png"), auto;
+}
+
+.text-bold {
+  text-shadow: 0 0.7px 0 rgba(42,28,87,1);
+}
