@@ -37,13 +37,17 @@ const ProjectsService = {
       };
     }
   },
-  async searchProjects(groupIds: string[], tagIds: string[], q: string) {
+  async searchProjects(query: {
+    groupIds?: string[];
+    tagIds?: string[];
+    q?: string;
+  }) {
     try {
+      const { groupIds, tagIds, q } = query;
       const data = (await baseService.get(`/projects/search`, {
         params: {
-          group_id: groupIds,
-          tag_id: tagIds,
-          q,
+          group_id: groupIds ?? [],
+          tag_id: tagIds ?? [],
         },
       })) as Project[];
       return {
