@@ -2,10 +2,14 @@ import { useEffect, useState } from "react";
 import { useRouter } from "../../../routes/hook";
 import ProjectsService from "../../../services/api/projects.service";
 import { ProjectDetails } from "../../../types/entities";
+import StackGrid, { transitions } from "react-stack-grid";
+
+const { scaleDown } = transitions;
 
 export default function Desktop() {
   const { page } = useRouter();
   const [project, setProject] = useState<ProjectDetails | null>(null);
+  const [previewPhoto, setPreviewPhoto] = useState<string | null>(null);
 
   useEffect(() => {
     const getProjectById = async (id: number) => {
@@ -20,21 +24,50 @@ export default function Desktop() {
     }
   }, []);
 
-  const onClick = () => {};
-
   return (
-    <div className="w-screen h-screen overflow-y-auto flex flex-wrap justify-center pt-20 pb-[200px]">
-    <div className="w-[55%] mx-auto flex flex-wrap justify-between">
-      {project &&
-        project.resource.child_resources.map((r) => !r.is_thumbnail && (
+    <div className="w-screen h-screen bg-[url(/images/portfolio/bg.png)] overflow-y-auto flex flex-wrap justify-center pt-20 pb-[200px]">
+      <StackGrid
+        columnWidth={"50%"}
+        appear={scaleDown.appear}
+        appeared={scaleDown.appeared}
+        enter={scaleDown.enter}
+        entered={scaleDown.entered}
+        leaved={scaleDown.leaved}
+        style={{
+          width: "50%",
+        }}
+      >
+        {project &&
+          project.resource.child_resources.map(
+            (r) =>
+              !r.is_thumbnail && (
+                <div className='px-[4px] py-[4px]'>
+                <img
+                  onClick={() => setPreviewPhoto(r.resource_id)}
+                  referrerPolicy="no-referrer"
+                  src={`https://lh3.googleusercontent.com/d/${r.resource_id}`}
+                  className="rounded-2xl shadow-xl"
+                />
+                </div>
+              )
+          )}
+      </StackGrid>
+      {previewPhoto && (
+        <div
+          onClick={(e) => {
+            if (e.currentTarget === e.target) {
+              setPreviewPhoto(null);
+            }
+          }}
+          className="w-screen h-screen fixed top-0 left-0 bg-[rgba(0,0,0,0.7)] z-[500] flex items-center justify-center animate-init-page"
+        >
           <img
-           onClick={() => alert(r.id)}
             referrerPolicy="no-referrer"
-            src={`https://lh3.googleusercontent.com/d/${r.resource_id}`}
-            className="w-[49%] pointer-events-none select-none mb-5"
+            src={`https://lh3.googleusercontent.com/d/${previewPhoto}`}
+            className="rounded-xl shadow-xl select-none max-h-[60vh]"
           />
-        ))}
-    </div>
+        </div>
+      )}
     </div>
   );
 }

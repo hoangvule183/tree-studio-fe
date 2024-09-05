@@ -69,8 +69,7 @@ export default function Desktop() {
             <div className="max-w-[85vw] w-full flex justify-center gap-[15px] flex-wrap">
               {projects &&
                 projects
-                  .filter((p) => p.thumbnail?.resource_id)
-                  .slice(0, 5)
+                  .filter((p) => p.is_show === true)
                   .map((project) => (
                     <div
                     onClick={() => setPageUrl(IPage.PROJECT_DETAILS, project.id)}
