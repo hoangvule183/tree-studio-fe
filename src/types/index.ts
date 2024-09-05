@@ -4,4 +4,5 @@ export enum IPage {
   PORTFOLIO = "portfolio",
   ABOUT_US = "about_us",
   CONTACT = "contact",
+  PROJECT_DETAILS = "project",
 }

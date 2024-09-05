@@ -1,10 +1,10 @@
-import { ApiErrorResponse, ApiSuccessResponse, Tag } from "../types/entities";
+import { ApiErrorResponse, ApiSuccessResponse, Tag } from "../../types/entities";
 import baseService from "./baseAxios";
 
 const TagsService = {
-  async getAll(): Promise<ApiSuccessResponse<Tag> | ApiErrorResponse> {
+  async getAll(): Promise<ApiSuccessResponse<Tag[]> | ApiErrorResponse> {
     try {
-      const data = (await baseService.get("/tags")) as Tag;
+      const data = (await baseService.get("/tags")) as Tag[];
       return {
         status: "success",
         data,

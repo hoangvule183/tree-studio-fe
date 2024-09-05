@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import TagsService from "../services/tags.service";
+import TagsService from "../services/api/tags.service";
 
 const getTags = async () => {
   const data = await TagsService.getAll();

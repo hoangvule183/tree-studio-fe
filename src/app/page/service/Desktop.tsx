@@ -1,10 +1,27 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import ScrollButton from "../../../components/ScrollButton";
+import { useStore } from "../../../services/zustand/store";
+import useProjects from "../../../hooks/use-projects";
+import { setPageUrl } from "../../../routes/utils";
+import { IPage } from "../../../types";
+import { useRouter } from "../../../routes/hook";
 
 export default function Desktop() {
+  const { changePage  } = useRouter();
+
   const containerRef = useRef<HTMLDivElement>(null);
   const secondViewRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
+  const { groups, tags } = useStore();
+  const { data: projects } = useProjects();
+
+  useEffect(() => {
+    console.log({ groups });
+    console.log({ tags });
+    console.log({ projects });
+  }, [groups, tags, projects]);
+
+  const onClick = () => {};
 
   return (
     <div
@@ -50,21 +67,32 @@ export default function Desktop() {
           </div>
           <div className="mt-[30px] flex justify-center">
             <div className="max-w-[85vw] w-full flex justify-center gap-[15px] flex-wrap">
-              <div className="w-[calc(100%/5-(15px*4/5))] aspect-[0.6] rounded-lg bg-orange-400 flex items-end  text-[#ffffff] px-[10px] py-[5px]">
-                2D <br /> GAME ART
-              </div>
-              <div className="w-[calc(100%/5-(15px*4/5))] aspect-[0.6] rounded-lg bg-orange-400 flex items-end  text-[#ffffff] px-[10px] py-[5px]">
-                3D <br /> GAME ART
-              </div>
-              <div className="w-[calc(100%/5-(15px*4/5))] aspect-[0.6] rounded-lg bg-orange-400 flex items-end  text-[#ffffff] px-[10px] py-[5px]">
-                ANIMATION
-              </div>
-              <div className="w-[calc(100%/5-(15px*4/5))] aspect-[0.6] rounded-lg bg-orange-400 flex items-end  text-[#ffffff] px-[10px] py-[5px]">
-                MOBILE <br /> GAME ART
-              </div>
-              <div className="w-[calc(100%/5-(15px*4/5))] aspect-[0.6] rounded-lg bg-orange-400 flex items-end  text-[#ffffff] px-[10px] py-[5px]">
-                UI/UX <br /> DESIGN
-              </div>
+              {projects &&
+                projects
+                  .filter((p) => p.thumbnail?.resource_id)
+                  .slice(0, 5)
+                  .map((project) => (
+                    <div
+                    onClick={() => setPageUrl(IPage.PROJECT_DETAILS, project.id)}
+                      key={project.id}
+                      className="w-[calc(100%/5-(15px*4/5))] aspect-[0.6] rounded-lg bg-orange-400 flex items-end  text-[#ffffff] px-[10px] py-[5px] relative"
+                    >
+                      {project.thumbnail?.resource_id && (
+                        <div 
+                    
+                        className='w-full h-full bg-'>
+                        <img
+                          referrerPolicy="no-referrer"
+                          src={`https://lh3.googleusercontent.com/d/${project.thumbnail?.resource_id}`}
+                          className="h-[85%] pointer-events-none select-none"
+                        />
+                        </div>
+                      )}
+                      <div className="absolute bottom-5 left-5">
+                        2D <br /> GAME ART
+                      </div>
+                    </div>
+                  ))}
             </div>
           </div>
         </div>

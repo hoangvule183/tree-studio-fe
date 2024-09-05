@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import ProjectsService from "../services/projects.service";
+import ProjectsService from "../services/api/projects.service";
 
 const getProjects = async () => {
   const data = await ProjectsService.getAll();
   if (data.status === "error") throw new Error(data.error);
-  return data;
+  return data.data;
 };
 
 const useProjects = () => {

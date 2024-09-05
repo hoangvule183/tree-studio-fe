@@ -2,7 +2,7 @@ import {
   ApiErrorResponse,
   ApiSuccessResponse,
   Resource,
-} from "../types/entities";
+} from "../../types/entities";
 import baseService from "./baseAxios";
 
 const ResourcesService = {

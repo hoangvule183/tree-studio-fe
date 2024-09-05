@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import GroupsService from "../services/groups.service";
+import GroupsService from "../services/api/groups.service";
 
 const getGroups = async () => {
   const data = await GroupsService.getAll();

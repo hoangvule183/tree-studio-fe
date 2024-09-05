@@ -2,6 +2,7 @@ import About from "../app/page/about";
 import Contact from "../app/page/contact";
 import Home from "../app/page/home";
 import Portfolio from "../app/page/portfolio";
+import ProjectDetails from "../app/page/project";
 import OurServices from "../app/page/service";
 import { IPage } from "../types";
 import { IRoute } from "./type";
@@ -82,6 +83,25 @@ const routes: IRoute[] = [
   {
     page: IPage.CONTACT,
     content: <Contact />,
+    transition: {
+      desktop: {
+        single: {
+          [IPage.HOME]: "/transition/contact/home.mp4",
+          [IPage.PORTFOLIO]: "/transition/contact/portfolio.mp4",
+          [IPage.SERVICE]: "/transition/contact/service.mp4",
+          [IPage.ABOUT_US]: "/transition/contact/about.mp4",
+          default: "/transition/contact/home.mp4",
+        },
+      },
+      mobile: {
+        in: "/transition/home/in.json",
+        out: "/transition/home/out.json",
+      },
+    },
+  },
+  {
+    page: IPage.PROJECT_DETAILS,
+    content: <ProjectDetails />,
     transition: {
       desktop: {
         single: {

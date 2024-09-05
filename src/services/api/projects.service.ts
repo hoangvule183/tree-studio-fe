@@ -3,7 +3,7 @@ import {
   ApiSuccessResponse,
   Project,
   ProjectDetails,
-} from "../types/entities";
+} from "../../types/entities";
 import baseService from "./baseAxios";
 
 const ProjectsService = {
