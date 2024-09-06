@@ -7,7 +7,7 @@ import { IPage } from "../../../types";
 import { useRouter } from "../../../routes/hook";
 
 export default function Desktop() {
-  const { changePage  } = useRouter();
+  const { changePage } = useRouter();
 
   const containerRef = useRef<HTMLDivElement>(null);
   const secondViewRef = useRef<HTMLDivElement>(null);
@@ -20,8 +20,6 @@ export default function Desktop() {
     console.log({ tags });
     console.log({ projects });
   }, [groups, tags, projects]);
-
-  const onClick = () => {};
 
   return (
     <div
@@ -69,26 +67,27 @@ export default function Desktop() {
             <div className="max-w-[85vw] w-full flex justify-center gap-[15px] flex-wrap">
               {projects &&
                 projects
-                  .filter((p) => p.is_show === true)
+                  .filter(p => p.ProjectGroupTag.findIndex(pgt => pgt.group.name.toLowerCase().includes("game art")) !== -1)
                   .map((project) => (
                     <div
-                    onClick={() => setPageUrl(IPage.PROJECT_DETAILS, project.id)}
+                      onClick={() =>
+                        setPageUrl(IPage.PROJECT_DETAILS, project.id)
+                      }
                       key={project.id}
                       className="w-[calc(100%/5-(15px*4/5))] aspect-[0.6] rounded-lg bg-orange-400 flex items-end  text-[#ffffff] px-[10px] py-[5px] relative"
                     >
                       {project.thumbnail?.resource_id && (
-                        <div 
-                    
-                        className='w-full h-full bg-'>
-                        <img
-                          referrerPolicy="no-referrer"
-                          src={`https://lh3.googleusercontent.com/d/${project.thumbnail?.resource_id}`}
-                          className="h-[85%] pointer-events-none select-none"
-                        />
+                        <div className="w-full h-full bg-">
+                          <img
+                            referrerPolicy="no-referrer"
+                            src={`https://lh3.googleusercontent.com/d/${project.thumbnail?.resource_id}`}
+                            className="h-[85%] pointer-events-none select-none"
+                          />
                         </div>
                       )}
                       <div className="absolute bottom-5 left-5">
-                        2D <br /> GAME ART
+                        {project.ProjectGroupTag.find(pgt => pgt.group.name.toLowerCase().includes("game art"))?.tag.name} <br />
+                        {project.ProjectGroupTag.find(pgt => pgt.group.name.toLowerCase().includes("game art"))?.group.name}
                       </div>
                     </div>
                   ))}

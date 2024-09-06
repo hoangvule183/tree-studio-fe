@@ -13,17 +13,28 @@ export type Group = {
 };
 
 export type Resource = {
+  createdAt: string;
+  updatedAt: string;
   id: number;
   resource_id: string;
   type: string;
   description: string | null;
   parent_resource_id: string | null;
   is_thumbnail: boolean;
-  createdAt: string;
-  updatedAt: string;
   child_resources: Resource[];
   parent_resource: Resource;
 };
+
+export type ProjectGroupTag = {
+  createdAt: string;
+  updatedAt: string;
+  id: number;
+  group_id: number;
+  tag_id: number;
+  project_id: number;
+  group: Group;
+  tag: Tag;
+}
 
 export type Project = {
   id: number;
@@ -36,6 +47,7 @@ export type Project = {
   createdAt: string;
   updatedAt: string;
   thumbnail: Resource | null;
+  ProjectGroupTag: ProjectGroupTag[]
 };
 
 export type ProjectDetails = {
