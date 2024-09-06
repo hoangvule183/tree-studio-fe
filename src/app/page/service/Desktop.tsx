@@ -1,25 +1,53 @@
-import { useEffect, useRef } from "react";
+import { useMemo, useRef } from "react";
 import ScrollButton from "../../../components/ScrollButton";
-import { useStore } from "../../../services/zustand/store";
 import useProjects from "../../../hooks/use-projects";
-import { setPageUrl } from "../../../routes/utils";
 import { IPage } from "../../../types";
 import { useRouter } from "../../../routes/hook";
 
 export default function Desktop() {
   const { changePage } = useRouter();
-
   const containerRef = useRef<HTMLDivElement>(null);
   const secondViewRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
-  const { groups, tags } = useStore();
   const { data: projects } = useProjects();
+  const gameArtProjects = useMemo(
+    () =>
+      projects
+        ? projects.filter(
+            (p) =>
+              p.ProjectGroupTag.findIndex((pgt) =>
+                pgt.group.name.toLowerCase().includes("game art")
+              ) !== -1
+          )
+        : [],
+    [projects]
+  );
 
-  useEffect(() => {
-    console.log({ groups });
-    console.log({ tags });
-    console.log({ projects });
-  }, [groups, tags, projects]);
+  const characterProjects = useMemo(
+    () =>
+      projects
+        ? projects.filter(
+            (p) =>
+              p.ProjectGroupTag.findIndex((pgt) =>
+                pgt.group.name.toLowerCase().includes("character")
+              ) !== -1
+          )
+        : [],
+    [projects]
+  );
+
+  const visualProjects = useMemo(
+    () =>
+      projects
+        ? projects.filter(
+            (p) =>
+              p.ProjectGroupTag.findIndex((pgt) =>
+                pgt.group.name.toLowerCase().includes("visual")
+              ) !== -1
+          )
+        : [],
+    [projects]
+  );
 
   return (
     <div
@@ -65,46 +93,37 @@ export default function Desktop() {
           </div>
           <div className="mt-[30px] flex justify-center">
             <div className="max-w-[85vw] w-full flex justify-center gap-[15px] flex-wrap">
-              {projects &&
-                projects
-                  .filter(
-                    (p) =>
-                      p.ProjectGroupTag.findIndex((pgt) =>
-                        pgt.group.name.toLowerCase().includes("game art")
-                      ) !== -1
-                  )
-                  .map((project) => (
-                    <div
-                      onClick={() =>
-                        setPageUrl(IPage.PROJECT_DETAILS, project.id)
-                      }
-                      key={project.id}
-                      className="w-[calc(100%/5-(15px*4/5))] aspect-[0.6] rounded-lg bg-orange-400 flex items-end  text-[#ffffff] px-[10px] py-[5px] relative"
-                    >
-                      {project.thumbnail?.resource_id && (
-                        <div className="w-full h-full bg-">
-                          <img
-                            referrerPolicy="no-referrer"
-                            src={`https://lh3.googleusercontent.com/d/${project.thumbnail?.resource_id}`}
-                            className="h-[85%] pointer-events-none select-none"
-                          />
-                        </div>
-                      )}
-                      <div className="absolute bottom-5 left-5">
-                        {
-                          project.ProjectGroupTag.find((pgt) =>
-                            pgt.group.name.toLowerCase().includes("game art")
-                          )?.tag.name
-                        }{" "}
-                        <br />
-                        {
-                          project.ProjectGroupTag.find((pgt) =>
-                            pgt.group.name.toLowerCase().includes("game art")
-                          )?.group.name
-                        }
-                      </div>
+              {gameArtProjects.map((project) => (
+                <div
+                  onClick={() => changePage(IPage.PROJECT_DETAILS, project.id)}
+                  key={project.id}
+                  className="w-[calc(100%/5-(15px*4/5))] aspect-[0.6] rounded-lg bg-orange-400 flex items-end  text-[#ffffff] overflow-hidden relative shadow-md hover:shadow-lg transition-all"
+                >
+                  <div className="absolute top-0 left-0 w-full h-full  bg-orange-400 opacity-0 hover:opacity-50 transition-opacity" />
+                  {project.thumbnail?.resource_id && (
+                    <div className="w-full h-full flex justify-center">
+                      <img
+                        referrerPolicy="no-referrer"
+                        src={`https://lh3.googleusercontent.com/d/${project.thumbnail?.resource_id}`}
+                        className="w-[100%] pointer-events-none select-none object-contain"
+                      />
                     </div>
-                  ))}
+                  )}
+                  <div className="absolute bottom-5 left-5">
+                    {
+                      project.ProjectGroupTag.find((pgt) =>
+                        pgt.group.name.toLowerCase().includes("game art")
+                      )?.tag.name
+                    }{" "}
+                    <br />
+                    {
+                      project.ProjectGroupTag.find((pgt) =>
+                        pgt.group.name.toLowerCase().includes("game art")
+                      )?.group.name
+                    }
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -129,47 +148,37 @@ export default function Desktop() {
           </div>
           <div className="mt-[40px] flex justify-center">
             <div className="max-w-[85vw] w-full flex justify-center gap-[15px] flex-wrap">
-              {projects &&
-                projects
-                  .filter(
-                    (p) =>
-                      p.ProjectGroupTag.findIndex((pgt) =>
-                        pgt.group.name.toLowerCase().includes("character")
-                      ) !== -1
-                  )
-                  .slice(0, 3)
-                  .map((project) => (
-                    <div
-                      onClick={() =>
-                        setPageUrl(IPage.PROJECT_DETAILS, project.id)
-                      }
-                      key={project.id}
-                      className="w-[calc(100%/3-(15px*2/3))] aspect-[1] rounded-lg bg-green-400 flex items-end  text-[#ffffff] px-[10px] py-[5px] relative"
-                    >
-                      {project.thumbnail?.resource_id && (
-                        <div className="w-full h-full bg-">
-                          <img
-                            referrerPolicy="no-referrer"
-                            src={`https://lh3.googleusercontent.com/d/${project.thumbnail?.resource_id}`}
-                            className="h-[85%] pointer-events-none select-none"
-                          />
-                        </div>
-                      )}
-                      <div className="absolute bottom-5 left-5">
-                        {
-                          project.ProjectGroupTag.find((pgt) =>
-                            pgt.group.name.toLowerCase().includes("character")
-                          )?.tag.name
-                        }{" "}
-                        <br />
-                        {
-                          project.ProjectGroupTag.find((pgt) =>
-                            pgt.group.name.toLowerCase().includes("character")
-                          )?.group.name
-                        }
-                      </div>
+              {characterProjects.slice(0, 3).map((project) => (
+                <div
+                  onClick={() => changePage(IPage.PROJECT_DETAILS, project.id)}
+                  key={project.id}
+                  className="w-[calc(100%/3-(15px*2/3))] aspect-[1] bg-green-400 rounded-lg flex items-end  text-[#ffffff] overflow-hidden relative shadow-md hover:shadow-lg transition-all"
+                >
+                  <div className="absolute top-0 left-0 w-full h-full  bg-green-400 opacity-0 hover:opacity-50 transition-opacity" />
+                  {project.thumbnail?.resource_id && (
+                    <div className="w-full h-full flex justify-center">
+                      <img
+                        referrerPolicy="no-referrer"
+                        src={`https://lh3.googleusercontent.com/d/${project.thumbnail?.resource_id}`}
+                        className="w-[100%] pointer-events-none select-none object-contain"
+                      />
                     </div>
-                  ))}
+                  )}
+                  <div className="absolute bottom-5 left-5">
+                    {
+                      project.ProjectGroupTag.find((pgt) =>
+                        pgt.group.name.toLowerCase().includes("character")
+                      )?.tag.name
+                    }{" "}
+                    <br />
+                    {
+                      project.ProjectGroupTag.find((pgt) =>
+                        pgt.group.name.toLowerCase().includes("character")
+                      )?.group.name
+                    }
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -192,47 +201,37 @@ export default function Desktop() {
           </div>
           <div className="mt-[40px] flex justify-center">
             <div className="max-w-[85vw] w-full flex justify-center gap-[15px] flex-wrap">
-              {projects &&
-                projects
-                  .filter(
-                    (p) =>
-                      p.ProjectGroupTag.findIndex((pgt) =>
-                        pgt.group.name.toLowerCase().includes("visual")
-                      ) !== -1
-                  )
-                  .slice(0, 3)
-                  .map((project) => (
-                    <div
-                      onClick={() =>
-                        setPageUrl(IPage.PROJECT_DETAILS, project.id)
-                      }
-                      key={project.id}
-                      className="w-[100%] aspect-[3] rounded-lg bg-blue-400 flex items-end  text-[#ffffff] px-[10px] py-[5px]"
-                    >
-                      {project.thumbnail?.resource_id && (
-                        <div className="w-full h-full bg-">
-                          <img
-                            referrerPolicy="no-referrer"
-                            src={`https://lh3.googleusercontent.com/d/${project.thumbnail?.resource_id}`}
-                            className="h-[85%] pointer-events-none select-none"
-                          />
-                        </div>
-                      )}
-                      <div className="absolute bottom-5 left-5">
-                        {
-                          project.ProjectGroupTag.find((pgt) =>
-                            pgt.group.name.toLowerCase().includes("visual")
-                          )?.tag.name
-                        }{" "}
-                        <br />
-                        {
-                          project.ProjectGroupTag.find((pgt) =>
-                            pgt.group.name.toLowerCase().includes("visual")
-                          )?.group.name
-                        }
-                      </div>
+              {visualProjects.slice(0, 3).map((project) => (
+                <div
+                  onClick={() => changePage(IPage.PROJECT_DETAILS, project.id)}
+                  key={project.id}
+                  className="w-[100%] aspect-[3] rounded-lg bg-blue-400 text-[#ffffff] relative overflow-hidden shadow-md hover:shadow-lg transition-all"
+                >
+                  <div className="absolute top-0 left-0 w-full h-full  bg-blue-400 opacity-0 hover:opacity-50 transition-opacity" />
+                  {project.thumbnail?.resource_id && (
+                    <div className="w-full h-full bg-">
+                      <img
+                        referrerPolicy="no-referrer"
+                        src={`https://lh3.googleusercontent.com/d/${project.thumbnail?.resource_id}`}
+                        className="w-[100%] pointer-events-none select-none object-cover object-center"
+                      />
                     </div>
-                  ))}
+                  )}
+                  <div className="absolute bottom-5 left-5">
+                    {
+                      project.ProjectGroupTag.find((pgt) =>
+                        pgt.group.name.toLowerCase().includes("visual")
+                      )?.tag.name
+                    }{" "}
+                    <br />
+                    {
+                      project.ProjectGroupTag.find((pgt) =>
+                        pgt.group.name.toLowerCase().includes("visual")
+                      )?.group.name
+                    }
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>

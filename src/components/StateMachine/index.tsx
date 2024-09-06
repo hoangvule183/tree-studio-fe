@@ -11,7 +11,7 @@ export const StateMachineContext = createContext({
     inTransitionCompleted: false,
     outTransitionCompleted: false,
   },
-  changePage: (page: IPage) => {
+  changePage: (page: IPage, projectId?: number) => {
     console.log(page);
   },
   onCompleteInTransition: () => {
@@ -96,9 +96,9 @@ export default function StateMachineProvider({
     }
   }, [page.activePage])
 
-  const changePage = useCallback((newPage: IPage) => {
+  const changePage = useCallback((newPage: IPage, projectId?: number) => {
     changePageState(newPage);
-    setPageUrl(newPage);
+    setPageUrl(newPage, projectId);
   }, [changePageState]);
 
   const onCompleteInTransition = useCallback(() => {

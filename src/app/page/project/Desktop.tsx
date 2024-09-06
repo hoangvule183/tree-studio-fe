@@ -3,6 +3,7 @@ import { useRouter } from "../../../routes/hook";
 import ProjectsService from "../../../services/api/projects.service";
 import { ProjectDetails } from "../../../types/entities";
 import StackGrid, { transitions } from "react-stack-grid";
+import { IPage } from "../../../types";
 
 const { scaleDown } = transitions;
 
@@ -12,20 +13,22 @@ export default function Desktop() {
   const [previewPhoto, setPreviewPhoto] = useState<string | null>(null);
 
   useEffect(() => {
-    const getProjectById = async (id: number) => {
-      const response = await ProjectsService.getById(id);
-      if (response.status === "error") return;
-      setProject(response.data);
-    };
-    const url = window.location.pathname;
-    const projectId = url.split("/")[2];
-    if (projectId) {
-      getProjectById(parseInt(projectId));
+    if (page.activePage === IPage.PROJECT_DETAILS) {
+      const getProjectById = async (id: number) => {
+        const response = await ProjectsService.getById(id);
+        if (response.status === "error") return;
+        setProject(response.data);
+      };
+      const url = window.location.pathname;
+      const projectId = url.split("/")[2];
+      if (projectId) {
+        getProjectById(parseInt(projectId));
+      }
     }
-  }, []);
+  }, [page]);
 
   return (
-    <div className="w-screen h-screen bg-[url(/images/portfolio/bg.png)] overflow-y-auto flex flex-wrap justify-center pt-20 pb-[200px]">
+    <div className="w-screen h-screen bg-[url(/images/portfolio/bg.png)] bg-fixed bg-cover bg-center overflow-y-auto flex flex-wrap justify-center pt-20 pb-[200px]">
       <StackGrid
         columnWidth={"50%"}
         appear={scaleDown.appear}
@@ -41,13 +44,13 @@ export default function Desktop() {
           project.resource.child_resources.map(
             (r) =>
               !r.is_thumbnail && (
-                <div className='px-[4px] py-[4px]'>
-                <img
-                  onClick={() => setPreviewPhoto(r.resource_id)}
-                  referrerPolicy="no-referrer"
-                  src={`https://lh3.googleusercontent.com/d/${r.resource_id}`}
-                  className="rounded-2xl shadow-xl"
-                />
+                <div className="px-[4px] py-[4px]">
+                  <img
+                    onClick={() => setPreviewPhoto(r.resource_id)}
+                    referrerPolicy="no-referrer"
+                    src={`https://lh3.googleusercontent.com/d/${r.resource_id}`}
+                    className="rounded-2xl shadow-xl"
+                  />
                 </div>
               )
           )}
