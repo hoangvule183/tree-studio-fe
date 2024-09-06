@@ -67,7 +67,12 @@ export default function Desktop() {
             <div className="max-w-[85vw] w-full flex justify-center gap-[15px] flex-wrap">
               {projects &&
                 projects
-                  .filter(p => p.ProjectGroupTag.findIndex(pgt => pgt.group.name.toLowerCase().includes("game art")) !== -1)
+                  .filter(
+                    (p) =>
+                      p.ProjectGroupTag.findIndex((pgt) =>
+                        pgt.group.name.toLowerCase().includes("game art")
+                      ) !== -1
+                  )
                   .map((project) => (
                     <div
                       onClick={() =>
@@ -86,8 +91,17 @@ export default function Desktop() {
                         </div>
                       )}
                       <div className="absolute bottom-5 left-5">
-                        {project.ProjectGroupTag.find(pgt => pgt.group.name.toLowerCase().includes("game art"))?.tag.name} <br />
-                        {project.ProjectGroupTag.find(pgt => pgt.group.name.toLowerCase().includes("game art"))?.group.name}
+                        {
+                          project.ProjectGroupTag.find((pgt) =>
+                            pgt.group.name.toLowerCase().includes("game art")
+                          )?.tag.name
+                        }{" "}
+                        <br />
+                        {
+                          project.ProjectGroupTag.find((pgt) =>
+                            pgt.group.name.toLowerCase().includes("game art")
+                          )?.group.name
+                        }
                       </div>
                     </div>
                   ))}
@@ -115,15 +129,47 @@ export default function Desktop() {
           </div>
           <div className="mt-[40px] flex justify-center">
             <div className="max-w-[85vw] w-full flex justify-center gap-[15px] flex-wrap">
-              <div className="w-[calc(100%/3-(15px*2/3))] aspect-[1] rounded-lg bg-green-400 flex items-end  text-[#ffffff] px-[10px] py-[5px]">
-                ANIMATION
-              </div>
-              <div className="w-[calc(100%/3-(15px*2/3))] aspect-[1] rounded-lg bg-green-400 flex items-end  text-[#ffffff] px-[10px] py-[5px]">
-                MOBILE <br /> GAME ART
-              </div>
-              <div className="w-[calc(100%/3-(15px*2/3))] aspect-[1] rounded-lg bg-green-400 flex items-end  text-[#ffffff] px-[10px] py-[5px]">
-                UI/UX <br /> DESIGN
-              </div>
+              {projects &&
+                projects
+                  .filter(
+                    (p) =>
+                      p.ProjectGroupTag.findIndex((pgt) =>
+                        pgt.group.name.toLowerCase().includes("character")
+                      ) !== -1
+                  )
+                  .slice(0, 3)
+                  .map((project) => (
+                    <div
+                      onClick={() =>
+                        setPageUrl(IPage.PROJECT_DETAILS, project.id)
+                      }
+                      key={project.id}
+                      className="w-[calc(100%/3-(15px*2/3))] aspect-[1] rounded-lg bg-green-400 flex items-end  text-[#ffffff] px-[10px] py-[5px] relative"
+                    >
+                      {project.thumbnail?.resource_id && (
+                        <div className="w-full h-full bg-">
+                          <img
+                            referrerPolicy="no-referrer"
+                            src={`https://lh3.googleusercontent.com/d/${project.thumbnail?.resource_id}`}
+                            className="h-[85%] pointer-events-none select-none"
+                          />
+                        </div>
+                      )}
+                      <div className="absolute bottom-5 left-5">
+                        {
+                          project.ProjectGroupTag.find((pgt) =>
+                            pgt.group.name.toLowerCase().includes("character")
+                          )?.tag.name
+                        }{" "}
+                        <br />
+                        {
+                          project.ProjectGroupTag.find((pgt) =>
+                            pgt.group.name.toLowerCase().includes("character")
+                          )?.group.name
+                        }
+                      </div>
+                    </div>
+                  ))}
             </div>
           </div>
         </div>
@@ -146,15 +192,47 @@ export default function Desktop() {
           </div>
           <div className="mt-[40px] flex justify-center">
             <div className="max-w-[85vw] w-full flex justify-center gap-[15px] flex-wrap">
-              <div className="w-[100%] aspect-[3] rounded-lg bg-blue-400 flex items-end  text-[#ffffff] px-[10px] py-[5px]">
-                ANIMATION
-              </div>
-              <div className="w-[100%] aspect-[3] rounded-lg bg-blue-400 flex items-end  text-[#ffffff] px-[10px] py-[5px]">
-                MOBILE <br /> GAME ART
-              </div>
-              <div className="w-[100%] aspect-[3] rounded-lg bg-blue-400 flex items-end  text-[#ffffff] px-[10px] py-[5px]">
-                UI/UX <br /> DESIGN
-              </div>
+              {projects &&
+                projects
+                  .filter(
+                    (p) =>
+                      p.ProjectGroupTag.findIndex((pgt) =>
+                        pgt.group.name.toLowerCase().includes("visual")
+                      ) !== -1
+                  )
+                  .slice(0, 3)
+                  .map((project) => (
+                    <div
+                      onClick={() =>
+                        setPageUrl(IPage.PROJECT_DETAILS, project.id)
+                      }
+                      key={project.id}
+                      className="w-[100%] aspect-[3] rounded-lg bg-blue-400 flex items-end  text-[#ffffff] px-[10px] py-[5px]"
+                    >
+                      {project.thumbnail?.resource_id && (
+                        <div className="w-full h-full bg-">
+                          <img
+                            referrerPolicy="no-referrer"
+                            src={`https://lh3.googleusercontent.com/d/${project.thumbnail?.resource_id}`}
+                            className="h-[85%] pointer-events-none select-none"
+                          />
+                        </div>
+                      )}
+                      <div className="absolute bottom-5 left-5">
+                        {
+                          project.ProjectGroupTag.find((pgt) =>
+                            pgt.group.name.toLowerCase().includes("visual")
+                          )?.tag.name
+                        }{" "}
+                        <br />
+                        {
+                          project.ProjectGroupTag.find((pgt) =>
+                            pgt.group.name.toLowerCase().includes("visual")
+                          )?.group.name
+                        }
+                      </div>
+                    </div>
+                  ))}
             </div>
           </div>
         </div>
