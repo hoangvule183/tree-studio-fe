@@ -49,7 +49,7 @@ export default function Desktop() {
                     onClick={() => setPreviewPhoto(r.resource_id)}
                     referrerPolicy="no-referrer"
                     src={`https://lh3.googleusercontent.com/d/${r.resource_id}`}
-                    className="rounded-2xl shadow-xl"
+                    className="rounded-2xl shadow-md hover:brightness-50 hover:shadow-xl hover:-translate-x-1 hover:-translate-y-1 transition-all"
                   />
                 </div>
               )
