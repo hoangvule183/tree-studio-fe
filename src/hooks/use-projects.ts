@@ -7,10 +7,11 @@ const getProjects = async () => {
   return data.data;
 };
 
-const useProjects = () => {
+const useProjects = (enabled: boolean = true) => {
   const { data, isError, isLoading, error } = useQuery({
     queryKey: ["GET_PROJECTS"],
     queryFn: getProjects,
+    enabled
   });
   return {
     data,

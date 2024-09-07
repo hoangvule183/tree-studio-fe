@@ -1,21 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import ProjectsService from "../services/api/projects.service";
-
-export type SearchProjectsParams = {
-  groupIds?: string[];
-  tagIds?: string[];
-  q?: string;
-};
+import ProjectsService, { SearchProjectsParams } from "../services/api/projects.service";
 
 const searchProjects = async ({ queryKey }: { queryKey: any }) => {
-  const query = queryKey[1] as {
-    groupIds?: string[];
-    tagIds?: string[];
-    q?: string;
-  };
+  const query = queryKey[1] as SearchProjectsParams
   const data = await ProjectsService.searchProjects(query);
   if (data.status === "error") throw new Error(data.error);
-  return data;
+  return data.data;
 };
 
 const useSearchProjects = (query?: SearchProjectsParams) => {
@@ -25,7 +15,7 @@ const useSearchProjects = (query?: SearchProjectsParams) => {
     enabled: !!query,
   });
   return {
-    data,
+    data: data ?? [],
     isError,
     error,
     isLoading,

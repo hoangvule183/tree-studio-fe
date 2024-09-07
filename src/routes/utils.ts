@@ -35,6 +35,9 @@ export function setPageUrl(page: IPage, projectId?: number) {
       break;
     case IPage.PORTFOLIO:
       url = "/portfolio";
+      if(projectId) {
+        url += `?group=${projectId}`
+      }
       break;
     case IPage.ABOUT_US:
       url = "/about-us";

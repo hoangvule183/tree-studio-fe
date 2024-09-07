@@ -3,13 +3,15 @@ import ScrollButton from "../../../components/ScrollButton";
 import useProjects from "../../../hooks/use-projects";
 import { IPage } from "../../../types";
 import { useRouter } from "../../../routes/hook";
+import { useStore } from "../../../services/zustand/store";
 
 export default function Desktop() {
-  const { changePage } = useRouter();
+  const { changePage, page } = useRouter();
   const containerRef = useRef<HTMLDivElement>(null);
   const secondViewRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
-  const { data: projects } = useProjects();
+  const groups = useStore((state) => state.groups);
+  const { data: projects } = useProjects(page.activePage === IPage.SERVICE);
   const gameArtProjects = useMemo(
     () =>
       projects
@@ -81,15 +83,32 @@ export default function Desktop() {
           </div>
         </div>
         <div className="mt-[-100px]" id="game-art-assets">
-          <img src="/images/service/2.png" className="w-[80%]" />
-          <div className="mt-[-80px] w-full flex justify-center gap-[20px]">
-            <h3 className="text-title text-[20px] font-black text-[rgba(241,110,102,1)]">
-              GAME ART & ASSETS
-            </h3>
-            <p className="mt-[10px] text-[#000000] text-sm max-w-[280px]">
-              A good art direction can take your game to the next level and we
-              have the skills to make that happen.
-            </p>
+          <img src="/images/service/2.png" className="w-[80%] select-none pointer-events-none" />
+          <div className="mt-[-80px] w-[70%] mx-auto flex justify-between gap-[20px] pb-[40px]">
+            <div className="w-[50%] flex gap-[20px]">
+              <h3 className="text-title text-[20px] font-black text-[rgba(241,110,102,1)]">
+                GAME ART & ASSETS
+              </h3>
+              <p className="mt-[10px] text-[#000000] text-sm max-w-[280px]">
+                A good art direction can take your game to the next level and we
+                have the skills to make that happen.
+              </p>
+            </div>
+            <div>
+              <button
+                onClick={() => {
+                  if (groups.length === 0) return;
+                  const group = groups.find((g) =>
+                    g.name.toLowerCase().includes("game art")
+                  );
+                  if (!group) return;
+                  changePage(IPage.PORTFOLIO, group.id);
+                }}
+                className="text-[#000000] text-sm"
+              >
+                View all
+              </button>
+            </div>
           </div>
           <div className="mt-[30px] flex justify-center">
             <div className="max-w-[85vw] w-full flex justify-center gap-[15px] flex-wrap">
@@ -137,13 +156,30 @@ export default function Desktop() {
               src="/images/service/4.png"
               className="w-[13%] absolute top-[-30px] right-0 z-[-1]"
             />
-            <div className="mt-[50px] w-full flex justify-center gap-[20px]">
-              <h3 className="text-title text-[20px] font-black text-[rgba(93,166,1,1)]">
-                CHARACTER DESIGN
-              </h3>
-              <p className="mt-[10px] text-[#000000] text-sm">
-                Creating memorable characters, evoking powerful emotions.
-              </p>
+            <div className="mt-[50px] w-[70%] mx-auto flex justify-between gap-[20px] pb-[40px]">
+              <div className="w-[50%] flex gap-[20px]">
+                <h3 className="text-title text-[20px] font-black text-[rgba(93,166,1,1)]">
+                  CHARACTER DESIGN
+                </h3>
+                <p className="mt-[10px] text-[#000000] text-sm">
+                  Creating memorable characters, evoking powerful emotions.
+                </p>
+              </div>
+              <div>
+                <button
+                  onClick={() => {
+                    if (groups.length === 0) return;
+                    const group = groups.find((g) =>
+                      g.name.toLowerCase().includes("character")
+                    );
+                    if (!group) return;
+                    changePage(IPage.PORTFOLIO, group.id);
+                  }}
+                  className="text-[#000000] text-sm"
+                >
+                  View all
+                </button>
+              </div>
             </div>
           </div>
           <div className="mt-[40px] flex justify-center">
@@ -188,18 +224,35 @@ export default function Desktop() {
               src="/images/service/5.png"
               className="w-[20%] absolute top-[10px] left-[3%] z-[-1]"
             />
-            <div className="mt-[50px] w-full flex flex-col items-center justify-center gap-[10px]">
-              <h3 className="text-title text-[20px] font-black text-[rgba(74,105,195,1)]">
-                VISUAL & DESIGN
-              </h3>
-              <p className="mt-[10px] text-[#000000] text-sm text-center">
-                Designs that catch the eye, leaving a long lasting impression{" "}
-                <br />
-                on anyone who views them.
-              </p>
+            <div className="mt-[50px] w-[70%] mx-auto flex flex-col gap-[20px]">
+              <div className="w-[100%] flex flex-col items-center gap-[10px]">
+                <h3 className="text-title text-[20px] font-black text-[rgba(74,105,195,1)]">
+                  VISUAL & DESIGN
+                </h3>
+                <p className="mt-[10px] text-[#000000] text-sm text-center">
+                  Designs that catch the eye, leaving a long lasting impression{" "}
+                  <br />
+                  on anyone who views them.
+                </p>
+              </div>
+              <div className="w-full flex items-center justify-end">
+                <button
+                  onClick={() => {
+                    if (groups.length === 0) return;
+                    const group = groups.find((g) =>
+                      g.name.toLowerCase().includes("visual")
+                    );
+                    if (!group) return;
+                    changePage(IPage.PORTFOLIO, group.id);
+                  }}
+                  className="text-[#000000] text-sm"
+                >
+                  View all
+                </button>
+              </div>
             </div>
           </div>
-          <div className="mt-[40px] flex justify-center">
+          <div className="mt-[40px] flex justify-center mb-[500px]">
             <div className="max-w-[85vw] w-full flex justify-center gap-[15px] flex-wrap">
               {visualProjects.slice(0, 3).map((project) => (
                 <div

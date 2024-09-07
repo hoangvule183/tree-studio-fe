@@ -6,6 +6,12 @@ import {
 } from "../../types/entities";
 import baseService from "./baseAxios";
 
+export type SearchProjectsParams = {
+  groupIds?: number[];
+  tagIds?: number[];
+  q?: string;
+};
+
 const ProjectsService = {
   async getAll(): Promise<ApiSuccessResponse<Project[]> | ApiErrorResponse> {
     try {
@@ -37,11 +43,7 @@ const ProjectsService = {
       };
     }
   },
-  async searchProjects(query: {
-    groupIds?: string[];
-    tagIds?: string[];
-    q?: string;
-  }) {
+  async searchProjects(query: SearchProjectsParams) {
     try {
       const { groupIds, tagIds, q } = query;
       const data = (await baseService.get(`/projects/search`, {
@@ -49,6 +51,9 @@ const ProjectsService = {
           group_id: groupIds ?? [],
           tag_id: tagIds ?? [],
         },
+        paramsSerializer: {
+          indexes: null
+        }
       })) as Project[];
       return {
         status: "success",
