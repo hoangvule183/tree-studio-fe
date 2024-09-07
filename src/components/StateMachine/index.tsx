@@ -12,7 +12,7 @@ export const StateMachineContext = createContext({
     outTransitionCompleted: false,
   },
   changePage: (page: IPage, projectId?: number) => {
-    console.log(page);
+    console.log(page, projectId);
   },
   onCompleteInTransition: () => {
     console.log("onCompleteInTransition");
