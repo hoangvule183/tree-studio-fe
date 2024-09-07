@@ -126,7 +126,7 @@ export default function Desktop() {
                 }
               })
               .map(
-                (p, i) =>
+                (p) =>
                   p.thumbnail?.resource_id && (
                     <div
                       onClick={() => changePage(IPage.PROJECT_DETAILS, p.id)}
