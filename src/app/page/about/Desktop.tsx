@@ -34,14 +34,24 @@ export default function Desktop() {
       </div>
       <div ref={secondViewRef} className="w-screen snap-start relative">
         <img src="/images/about/temp.png" className="w-screen" />
-        {/* <div
+        <div
           onClick={() => alert(true)}
           className="mix-blend-overlay cursor-pointer absolute top-[28.4%] z-[1000] left-[49.5%] w-[7%] aspect-square rounded-full bg-green-400"
-        ></div> */}
+        ></div>
 
 <div
           onClick={() => alert(true)}
           className="mix-blend-overlay cursor-pointer absolute top-[30.4%] z-[1000] left-[55.5%] w-[9%] aspect-square rounded-full bg-green-400 opacity-0 hover:opacity-100"
+        ></div>
+
+<div
+          onClick={() => alert(true)}
+          className="mix-blend-overlay cursor-pointer absolute top-[31%] z-[1000] left-[48%] w-[7%] aspect-square rounded-full bg-green-400 opacity-0 hover:opacity-100"
+        ></div>
+
+<div
+          onClick={() => alert(true)}
+          className="mix-blend-overlay cursor-pointer absolute top-[31.2%] z-[1000] left-[43%] w-[6%] aspect-square rounded-full bg-green-400 opacity-0 hover:opacity-100"
         ></div>
 
         {/* <div
