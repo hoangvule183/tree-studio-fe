@@ -43,7 +43,7 @@ const ProjectsService = {
     q?: string;
   }) {
     try {
-      const { groupIds, tagIds, q } = query;
+      const { groupIds, tagIds } = query;
       const data = (await baseService.get(`/projects/search`, {
         params: {
           group_id: groupIds ?? [],
