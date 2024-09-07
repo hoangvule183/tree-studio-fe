@@ -32,8 +32,27 @@ export default function Desktop() {
         />
         <ScrollButton containerRef={containerRef} nextViewRef={secondViewRef} />
       </div>
-      <div ref={secondViewRef} className="w-screen snap-start">
+      <div ref={secondViewRef} className="w-screen snap-start relative">
         <img src="/images/about/temp.png" className="w-screen" />
+        {/* <div
+          onClick={() => alert(true)}
+          className="mix-blend-overlay cursor-pointer absolute top-[28.4%] z-[1000] left-[49.5%] w-[7%] aspect-square rounded-full bg-green-400"
+        ></div> */}
+
+<div
+          onClick={() => alert(true)}
+          className="mix-blend-overlay cursor-pointer absolute top-[30.4%] z-[1000] left-[55.5%] w-[9%] aspect-square rounded-full bg-green-400 opacity-0 hover:opacity-100"
+        ></div>
+
+        {/* <div
+          onClick={() => alert(true)}
+          className="mix-blend-lighten cursor-pointer absolute top-[28.4%] z-[1000] left-[51%] w-[5%] aspect-square bg-[red]"
+        ></div>
+
+        <div
+          onClick={() => alert(true)}
+          className="mix-blend-lighten cursor-pointer absolute top-[28.4%] z-[1000] left-[51%] w-[5%] aspect-square bg-[red]"
+        ></div> */}
       </div>
     </div>
   );
