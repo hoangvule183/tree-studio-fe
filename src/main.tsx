@@ -8,15 +8,16 @@ import LoadingResource from "./components/LoadingResource/index.tsx";
 ReactDOM.createRoot(document.getElementById("root")!).render(
   // <React.StrictMode>
   <>
-    <div className="max-md:hidden">
+    {/* <div className="max-md:hidden"> */}
+    <div className="">
       <StateMachineProvider>
         <App />
         <LoadingResource />
       </StateMachineProvider>
     </div>
-    <div className="md:hidden h-screen w-screen flex justify-center items-center">
+    {/* <div className="md:hidden h-screen w-screen flex justify-center items-center">
       <h1 className="text-2xl">Mobile site is not ready yet</h1>
-    </div>
+    </div> */}
   </>
   // </React.StrictMode>
 );
