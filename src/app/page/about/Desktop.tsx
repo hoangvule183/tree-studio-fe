@@ -9,10 +9,6 @@ export default function Desktop() {
   const containerRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
   const secondViewRef = useRef<HTMLDivElement>(null);
-  const [hoverId, setHoverId] = useState<number | null>(null);
-  const [modalPos, setModalPos] = useState<{ x: number; y: number } | null>(
-    null
-  );
 
   useEffect(() => {
     if (page?.activePage === IPage.ABOUT_US) {
@@ -46,106 +42,15 @@ export default function Desktop() {
             <img src="/images/about/about-us-album.png" className="w-[70%]" />
             <div className="absolute w-[41%] mx-auto aspect-video rounded-lg shadow-2xl overflow-hidden">
               <video
-                src="/videos/about/banner-desktop.mp4"
-                autoPlay={true}
+                src="/videos/about/about-us-ablum-video.mp4"
+                autoPlay={false}
                 muted
+                controls
                 className="w-full h-full object-cover"
               />
             </div>
           </div>
         </div>
-        {/* <img src="/images/about/temp.png" className="w-screen" />
-        {hoverId && (
-          <div
-            style={{
-              left: `${modalPos?.x}%`,
-              top: `${modalPos?.y}%`,
-              background: `url(/images/about/member-info/member-${hoverId}.png)`,
-              backgroundSize: 'cover',
-              backgroundPosition: "center",
-            }}
-            className={`absolute z-[1001] translate-x-[20%]  -translate-y-[10%] bg-[red] w-[20%] aspect-video
-            `}
-          >
-          </div>
-        )}
-        <div
-          onMouseEnter={() => {
-            setHoverId(1);
-            setModalPos({ x: 51, y: 27 });
-          }}
-          onMouseLeave={() => {
-            setHoverId(null);
-            setModalPos(null);
-          }}
-          onClick={() => alert(true)}
-          className="mix-blend-overlay cursor-pointer absolute top-[28.4%] z-[1000] left-[49.5%] w-[7%] aspect-square rounded-full bg-green-400"
-        ></div>
-
-        <div
-          onMouseEnter={() => {
-            setHoverId(2);
-            setModalPos({ x: 55.5, y: 30.4 });
-          }}
-          onMouseLeave={() => {
-            setHoverId(null);
-            setModalPos(null);
-          }}
-          onClick={() => alert(true)}
-          className="mix-blend-overlay cursor-pointer absolute top-[30.4%] z-[1000] left-[55.5%] w-[9%] aspect-square rounded-full bg-green-400 opacity-0 hover:opacity-100"
-        ></div>
-
-        <div
-          onClick={() => alert(true)}
-          onMouseEnter={() => {
-            setHoverId(3);
-            setModalPos({ x: 48, y: 30 });
-          }}
-          onMouseLeave={() => {
-            setHoverId(null);
-            setModalPos(null);
-          }}
-          className="mix-blend-overlay cursor-pointer absolute top-[31%] z-[1000] left-[48%] w-[7%] aspect-square rounded-full bg-green-400 opacity-0 hover:opacity-100"
-        ></div>
-
-        <div
-          onMouseEnter={() => {
-            setHoverId(4);
-            setModalPos({ x: 43.5, y: 30 });
-          }}
-          onMouseLeave={() => {
-            setHoverId(null);
-            setModalPos(null);
-          }}
-          onClick={() => alert(true)}
-          className="mix-blend-overlay cursor-pointer absolute top-[31.2%] z-[1000] left-[43%] w-[6%] aspect-square rounded-full bg-green-400 opacity-0 hover:opacity-100"
-        ></div>
-
-        <div
-          onMouseEnter={() => {
-            setHoverId(5);
-            setModalPos({ x: 30.5, y: 29 });
-          }}
-          onMouseLeave={() => {
-            setHoverId(null);
-            setModalPos(null);
-          }}
-          onClick={() => alert(true)}
-          className="mix-blend-overlay cursor-pointer absolute top-[30%] z-[1000] left-[29%] w-[7%] aspect-square rounded-full bg-green-400 opacity-0 hover:opacity-100"
-        ></div>
-
-        <div
-          onMouseEnter={() => {
-            setHoverId(6);
-            setModalPos({ x: 48.5, y: 34.5 });
-          }}
-          onMouseLeave={() => {
-            setHoverId(null);
-            setModalPos(null);
-          }}
-          onClick={() => alert(true)}
-          className="mix-blend-overlay cursor-pointer absolute top-[36%] z-[1000] left-[47%] w-[7%] aspect-square rounded-full bg-green-400 opacity-100 hover:opacity-100"
-        ></div> */}
       </div>
     </div>
   );
