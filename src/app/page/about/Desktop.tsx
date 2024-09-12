@@ -41,13 +41,16 @@ export default function Desktop() {
           <div className="w-full flex justify-center items-center mt-[300px] relative">
             <img src="/images/about/about-us-album.png" className="w-[70%]" />
             <div className="absolute w-[41%] mx-auto aspect-video rounded-lg shadow-2xl overflow-hidden">
-              <video
-                src="/videos/about/about-us-album-video.mp4"
-                autoPlay={false}
-                muted
-                controls
-                className="w-full h-full object-cover"
-              />
+              <iframe
+                width="100%"
+                height="100%"
+                src="https://www.youtube.com/embed/LbS7WSFlrW8"
+                title="Welcome to TREE Studios"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              ></iframe>
             </div>
           </div>
         </div>

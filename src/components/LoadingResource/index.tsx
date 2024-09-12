@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useDebounce } from "@uidotdev/usehooks";
 import useStateMachine from "../StateMachine/hook";
+import LoadingBar from "../LoadingBar";
 
 export default function LoadingResource() {
   const [fakePercentage, setFakePercentage] = useState(0);
@@ -68,8 +69,9 @@ export default function LoadingResource() {
   }
 
   return (
-    <div className="fixed top-0 left-0 right-0 bottom-0 z-[100] w-screen h-screen bg-gray-50 flex items-center justify-center">
-      Loading... ({Number(fakePercentage).toFixed(2)}%)
+    <div className="fixed top-0 left-0 right-0 bottom-0 z-[100] w-screen h-screen bg-[#606060] flex items-center justify-center">
+      {/* Loading... ({Number(fakePercentage).toFixed(2)}%) */}
+      <LoadingBar percentage={fakePercentage} />
     </div>
   );
 }
