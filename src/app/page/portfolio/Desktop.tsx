@@ -51,8 +51,20 @@ export default function Desktop() {
       </div>
       <div
         ref={secondViewRef}
-        className="w-screen min-h-screen bg-[url(/images/portfolio/bg.png)] bg-cover snap-start pt-[200px]"
+        className="w-screen min-h-screen bg-[url(/images/portfolio/bg.png)] bg-cover snap-start pt-[100px] flex flex-col gap-5"
       >
+        <div
+          style={{
+            width: "100%",
+            position: "relative",
+          }}
+          className="flex justify-center items-center pb-[0px] h-[300px] mb-[100px]"
+        >
+          <img
+            src="/images/portfolio/port-header-title.png"
+            className="h-[300px] absolute mx-[15%]"
+          />
+        </div>
         <div
           style={{
             margin: "auto",
@@ -96,7 +108,8 @@ export default function Desktop() {
                 className="focus:bg-[url(/images/portfolio/filter-go-btn-clicked.png)] bg-[url(/images/portfolio/filter-go-btn-idle.png)] text-[white] h-[45px] aspect-video bg-no-repeat bg-center bg-cover"
                 onClick={(e) => {
                   e.currentTarget.blur();
-                  setSortBy(tmpSortBy)}}
+                  setSortBy(tmpSortBy);
+                }}
               ></button>
             </div>
           </div>
