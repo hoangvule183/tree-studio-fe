@@ -56,25 +56,50 @@ export default function Desktop() {
         <div
           style={{
             margin: "auto",
-
             width: "50%",
-            height: "100px",
-            background: "blue",
-            clipPath:
-              "polygon(32% 29%, 100% 30%, 100% 100%, 7% 100%, 0 83%, 0 0, 21% 0)",
+            position: "relative",
           }}
-          className='flex items-center gap-5 justify-center pt-[20px]'
+          className="flex justify-center items-center pb-[20px]"
         >
-          <select
-            value={tmpSortBy}
-            onChange={(e) => setTmpSortBy(e.target.value as SortTypeEnum)}
-          >
-            <option value={SortTypeEnum.NEWEST}>Newest</option>
-            <option value={SortTypeEnum.OLDEST}>Oldest</option>
-            <option value={SortTypeEnum.NAME_A_TO_Z}>Name (A to Z)</option>
-            <option value={SortTypeEnum.NAME_Z_TO_A}>Name (Z to A)</option>
-          </select>
-          <button  className='bg-[black] text-[white] p-5' onClick={() => setSortBy(tmpSortBy)}>Go</button>
+          <img
+            src="/images/portfolio/filter-bg.png"
+            className="w-[70%] absolute mx-[15%] z-[10] max-[1200px]:w-[100%]"
+          />
+          <div className="w-[62.2%] max-[1200px]:w-[85%]  aspect-[4.1] absolute mx-[15%] z-[15] flex flex-col justify-start items-start px-[25px] py-[10px]">
+            <div className="w-full text-[#01fcc6] text-[1.5rem] mt-[10px]">
+              SORT BY
+            </div>
+            <div className="w-full flex mt-[15px] gap-3">
+              <div className="flex-1 h-[45px] relative">
+                <select
+                  className="w-full rounded-md text-[1.2rem] border-solid border-[1px] outline-none bg-transparent border-[#01fcc6] text-[#01fcc6] px-2 h-[100%]"
+                  value={tmpSortBy}
+                  onChange={(e) => setTmpSortBy(e.target.value as SortTypeEnum)}
+                >
+                  <option value={SortTypeEnum.NEWEST}>Newest</option>
+                  <option value={SortTypeEnum.OLDEST}>Oldest</option>
+                  <option value={SortTypeEnum.NAME_A_TO_Z}>
+                    Name (A to Z)
+                  </option>
+                  <option value={SortTypeEnum.NAME_Z_TO_A}>
+                    Name (Z to A)
+                  </option>
+                </select>
+                <div className="h-[100%] aspect-square absolute right-[0px] top-0 pointer-events-none">
+                  <img
+                    src="/images/portfolio/filter-dd-icon.png"
+                    className="w-[100%] h-[100%] absolute"
+                  />
+                </div>
+              </div>
+              <button
+                className="focus:bg-[url(/images/portfolio/filter-go-btn-clicked.png)] bg-[url(/images/portfolio/filter-go-btn-idle.png)] text-[white] h-[45px] aspect-video bg-no-repeat bg-center bg-cover"
+                onClick={(e) => {
+                  e.currentTarget.blur();
+                  setSortBy(tmpSortBy)}}
+              ></button>
+            </div>
+          </div>
         </div>
         <div
           key={sortBy}
