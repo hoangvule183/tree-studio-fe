@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import ScrollButton from "../../../components/ScrollButton";
 import { useRouter } from "../../../routes/hook";
 import { IPage } from "../../../types";
@@ -42,7 +42,7 @@ export default function Desktop() {
             <img src="/images/about/about-us-album.png" className="w-[70%]" />
             <div className="absolute w-[41%] mx-auto aspect-video rounded-lg shadow-2xl overflow-hidden">
               <video
-                src="/videos/about/about-us-ablum-video.mp4"
+                src="/videos/about/about-us-album-video.mp4"
                 autoPlay={false}
                 muted
                 controls
