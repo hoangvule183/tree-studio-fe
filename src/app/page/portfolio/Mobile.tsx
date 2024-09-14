@@ -7,7 +7,6 @@ import { IPage } from "../../../types";
 
 export default function Mobile() {
   const { changePage, page } = useRouter();
-  const containerRef = useRef<HTMLDivElement>(null);
   const secondViewRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
   const groups = useStore((state) => state.groups);
