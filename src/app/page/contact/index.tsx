@@ -43,7 +43,7 @@ export default function Contact() {
           className="w-screen h-screen object-cover"
         />
         <div className="absolute w-screen h-screen top-0 left-0 pt-[100px] items-center text-balance select-none text-[rgba(42,28,87,1)] flex flex-col">
-          <div className="w-[60%] text-[1.25rem] flex flex-col gap-[20px]">
+          <div className="w-[70%] text-[1.05rem] flex flex-col gap-[20px]">
           <div className="pl-[35px]">
             <p className="text-bold">Let's make magic!</p>
             <p>Tree Studios</p>

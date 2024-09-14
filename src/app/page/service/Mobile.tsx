@@ -8,7 +8,7 @@ export default function Mobile() {
   const { changePage, page } = useRouter();
   const groups = useStore((state) => state.groups);
   const { data: projects } = useProjects(page.activePage === IPage.SERVICE);
-  const gameArtProjects = useMemo(
+  const gameArtProjects = useMemo( 
     () =>
       projects
         ? projects.filter(
