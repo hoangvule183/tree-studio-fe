@@ -38,6 +38,7 @@ export default function Desktop() {
         leaved={scaleDown.leaved}
         gutterWidth={20}
         gutterHeight={20}
+        duration={0}
         style={{
           width: "50%",
         }}
@@ -46,12 +47,12 @@ export default function Desktop() {
           project.resource.child_resources.map(
             (r) =>
               !r.is_thumbnail && (
-                  <img
-                    onClick={() => setPreviewPhoto(r.resource_id)}
-                    referrerPolicy="no-referrer"
-                    src={`https://lh3.googleusercontent.com/d/${r.resource_id}`}
-                    className="rounded-2xl shadow-md hover:brightness-50 hover:shadow-xl hover:-translate-x-1 hover:-translate-y-1 transition-all"
-                  />
+                <img
+                  onClick={() => setPreviewPhoto(r.resource_id)}
+                  referrerPolicy="no-referrer"
+                  src={`https://lh3.googleusercontent.com/d/${r.resource_id}`}
+                  className="rounded-2xl shadow-md hover:brightness-50 hover:shadow-xl hover:-translate-x-1 hover:-translate-y-1 transition-all"
+                />
               )
           )}
       </StackGrid>
