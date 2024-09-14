@@ -1,4 +1,4 @@
-import { useMemo, useRef } from "react";
+import { useMemo } from "react";
 import { useRouter } from "../../../routes/hook";
 import useProjects from "../../../hooks/use-projects";
 import { useStore } from "../../../services/zustand/store";
@@ -6,9 +6,6 @@ import { IPage } from "../../../types";
 
 export default function Mobile() {
   const { changePage, page } = useRouter();
-  const containerRef = useRef<HTMLDivElement>(null);
-  const secondViewRef = useRef<HTMLDivElement>(null);
-  const heroRef = useRef<HTMLDivElement>(null);
   const groups = useStore((state) => state.groups);
   const { data: projects } = useProjects(page.activePage === IPage.SERVICE);
   const gameArtProjects = useMemo(
