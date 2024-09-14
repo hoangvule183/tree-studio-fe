@@ -31,11 +31,12 @@ export default function Mobile() {
   }, [page.activePage, groups]);
 
   return (
-    <div 
-    style={{
-      height: "102vh",
-    }}
-    className="w-screen md:hidden">
+    <div
+      style={{
+        height: "102vh",
+      }}
+      className="w-screen md:hidden"
+    >
       <div className="w-screen h-[100%] overflow-y-auto snap-mandatory snap-y">
         <div className="w-screen h-screen relative snap-start" ref={heroRef}>
           <video
@@ -67,16 +68,16 @@ export default function Mobile() {
           <div
             style={{
               margin: "auto",
-              width: "80%",
+              // width: "80%",
               position: "relative",
             }}
-            className="flex justify-center items-center pb-[20px] max-[450px]:w-[100%]"
+            className="flex justify-center w-[80%] items-center pb-[20px] max-[450px]:w-[100%]"
           >
             <img
               src="/images/portfolio/filter-bg.png"
-              className="w-[70%] absolute mx-[15%] z-[10] max-[1200px]:w-[100%] h-[220px]"
+              className="w-[70%]  max-[400px]:w-[100%]  absolute mx-[15%]  max-[400px]:mx-[0%]  z-[10] max-[1200px]:w-[100%] h-[220px]"
             />
-            <div className="w-[62.2%] max-[1200px]:w-[85%]  aspect-[4.1] absolute mx-[15%] z-[15] flex flex-col justify-start items-start px-[25px] py-[10px]">
+            <div className="w-[62.2%] max-[1200px]:w-[85%] aspect-[4.1] absolute mx-[15%] z-[15] flex flex-col justify-start items-start px-[25px] py-[10px]">
               <div className="w-full text-[#01fcc6] text-[1.5rem] max-[550px]:text-[1.2rem] mt-[10px]">
                 SORT BY
               </div>

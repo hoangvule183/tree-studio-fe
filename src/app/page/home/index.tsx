@@ -35,10 +35,10 @@ export default function Home() {
           className="relative w-auto h-screen max-w-[unset] animate-background-translate"
         />
       </div>
-      <div className="absolute top-[15%] text-balance text-white select-none px-[20px]">
+      <div className="absolute top-[15%] text-balance text-white select-none px-[60px] text-[1.25rem]">
         <img
           src="/images/common/logo-white.png"
-          className="w-[60px] mb-[10px]"
+          className="w-[100px] mb-[40px]"
         />
         Tree studio is an art outsourcing studio for game art, concept art,
         2D/3D environment, assets and animations specializing in stylized art
